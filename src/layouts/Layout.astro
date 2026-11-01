@@ -1,0 +1,108 @@
+---
+import '../index.css';
+import { COMPANY_INFO } from '../data/solarData';
+
+interface Props {
+  title: string;
+  description: string;
+  ogImage?: string;
+}
+
+const {
+  title,
+  description,
+  ogImage = '/images/hero_solar_rooftop_binhduong_1793562355617.jpg',
+} = Astro.props;
+
+// Absolute URL for Open Graph assets; falls back to the real site origin.
+const site = Astro.site ?? new URL('https://thanhnamsolar.com');
+const canonicalURL = new URL(Astro.url.pathname, site);
+const ogImageURL = new URL(ogImage, site);
+
+// Structured data for local SEO (LocalBusiness schema).
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'LocalBusiness',
+  name: 'ThanhNamSolar Bình Dương',
+  image: ogImageURL.href,
+  telephone: '+84988567892',
+  email: 'lienhe@thanhnamsolar.com',
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: 'Số 168 Đại lộ Bình Dương, Phường Phú Hòa',
+    addressLocality: 'Thành phố Thủ Dầu Một',
+    addressRegion: 'Bình Dương',
+    addressCountry: 'VN',
+  },
+  geo: {
+    '@type': 'GeoCoordinates',
+    latitude: 10.9804,
+    longitude: 106.6744,
+  },
+  url: site.href,
+  priceRange: '$$',
+  openingHoursSpecification: [
+    {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: [
+        'Monday',
+        'Tuesday',
+        'Wednesday',
+        'Thursday',
+        'Friday',
+        'Saturday',
+        'Sunday',
+      ],
+      opens: '07:30',
+      closes: '18:30',
+    },
+  ],
+  areaServed: [
+    'Thủ Dầu Một',
+    'Dĩ An',
+    'Thuận An',
+    'Bến Cát',
+    'Tân Uyên',
+    'Bàu Bàng',
+    'Bắc Tân Uyên',
+  ],
+};
+
+void COMPANY_INFO;
+---
+
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalURL.href} />
+
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="ThanhNamSolar" />
+    <meta property="og:url" content={canonicalURL.href} />
+    <meta property="og:image" content={ogImageURL.href} />
+    <meta property="og:locale" content="vi_VN" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageURL.href} />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  </head>
+  <body class="bg-white text-slate-900 antialiased font-sans">
+    <slot />
+  </body>
+</html>
