@@ -20,7 +20,7 @@ export const SeoContentSection: React.FC<SeoContentSectionProps> = ({ onOpenQuot
 
           {/* Standard SEO Paragraph required by user spec */}
           <p className="text-base sm:text-lg lg:text-xl text-slate-700 leading-relaxed text-balance">
-            <strong>ThanhNamSolar</strong> tự hào là đơn vị chuyên cung cấp giải pháp thiết kế và lắp đặt điện mặt trời giá rẻ tại Bình Dương. Chúng tôi mang đến các gói đầu tư tối ưu cho hộ gia đình và doanh nghiệp với mức chi phí tiết kiệm nhất, hoàn vốn nhanh, thiết bị đạt chuẩn quốc tế (Tier 1) cùng dịch vụ hậu mãi đồng hành trọn đời công trình.
+            <strong>ThanhNam<span className="text-emerald-600">Solar</span></strong> tự hào là đơn vị chuyên cung cấp giải pháp thiết kế và lắp đặt điện mặt trời giá rẻ tại Bình Dương. Chúng tôi mang đến các gói đầu tư tối ưu cho hộ gia đình và doanh nghiệp với mức chi phí tiết kiệm nhất, hoàn vốn nhanh, thiết bị đạt chuẩn quốc tế (Tier 1) cùng dịch vụ hậu mãi đồng hành trọn đời công trình.
           </p>
         </div>
 

@@ -12,4 +12,10 @@
 
 html {
   scroll-behavior: smooth;
+  /* Chặn cuộn ngang do phần tử trang trí tràn mép (ví dụ mũi tên carousel) */
+  overflow-x: hidden;
+}
+
+body {
+  overflow-x: hidden;
 }

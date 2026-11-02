@@ -37,7 +37,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenQuoteModal }) => {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Strictly compliant Top Bar Contract: 3 zones separated by gap-8 */}
-        <div className="flex items-center justify-between gap-8">
+        <div className="flex items-center justify-between gap-3 sm:gap-4 lg:gap-8 min-w-0">
           {/* Zone 1: Brand Wordmark element */}
           <a
             href="#trang-chu"
@@ -72,10 +72,10 @@ export const Header: React.FC<HeaderProps> = ({ onOpenQuoteModal }) => {
           </nav>
 
           {/* Zone 3: Hotline and 1 Primary CTA Action */}
-          <div className="hidden sm:flex items-center gap-4 shrink-0">
+          <div className="hidden sm:flex items-center gap-2 lg:gap-4 min-w-0">
             <a
               href={`tel:${COMPANY_INFO.hotlineRaw}`}
-              className="flex items-center gap-2.5 text-slate-800 hover:text-emerald-600 transition-colors py-1.5 px-3.5 rounded-xl hover:bg-slate-50 whitespace-nowrap shrink-0"
+              className="hidden md:flex items-center gap-2.5 text-slate-800 hover:text-emerald-600 transition-colors py-1.5 px-2 lg:px-3.5 rounded-xl hover:bg-slate-50 whitespace-nowrap shrink min-w-0"
               title="Gọi hotline tư vấn trực tiếp"
             >
               <div className="w-8 h-8 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center">

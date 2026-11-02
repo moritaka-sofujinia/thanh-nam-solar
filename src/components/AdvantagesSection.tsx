@@ -20,7 +20,7 @@ export const AdvantagesSection: React.FC<AdvantagesSectionProps> = ({ onOpenQuot
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-slate-900 tracking-tight leading-[1.2]">
-            TẠI SAO CHỌN THANHNAMSOLAR?
+            TẠI SAO CHỌN THANHNAM<span className="text-emerald-600">SOLAR</span>?
           </h2>
           <div className="w-20 h-1.5 bg-emerald-600 mx-auto mt-4 mb-5 rounded-full" />
           <p className="text-base sm:text-lg text-slate-600 leading-relaxed">
@@ -29,26 +29,29 @@ export const AdvantagesSection: React.FC<AdvantagesSectionProps> = ({ onOpenQuot
         </div>
 
         {/* 4 Statistics / Competitive Advantage Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-20">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-20">
           {ADVANTAGES_DATA.map((adv, idx) => (
             <div
               key={idx}
-              className="p-7 bg-slate-50 border border-slate-200/80 rounded-2xl hover:border-emerald-500/50 hover:bg-emerald-50/20 transition-all duration-200 flex flex-col justify-between"
+              className="p-6 sm:p-7 bg-slate-50 border border-slate-200/80 rounded-2xl hover:border-emerald-500/50 hover:bg-emerald-50/20 transition-all duration-200 flex flex-col justify-between"
             >
-              <div>
-                <div className="flex items-center gap-3 mb-2">
-                  <div className="w-12 h-12 shrink-0 rounded-xl bg-white border border-slate-200 text-emerald-600 flex items-center justify-center shadow-xs">
-                    {advantageIcons[idx]}
-                  </div>
-                  <div className="text-xl sm:text-2xl lg:text-3xl xl:text-4xl font-extrabold tracking-tight tabular-nums text-emerald-700 leading-none whitespace-nowrap">
-                    {adv.value}
-                  </div>
+              {/* Icon + số liệu + nhãn chung một khối, đồng màu xanh thương hiệu */}
+              <div className="flex items-center gap-2.5 sm:gap-3 text-emerald-600">
+                <div className="w-10 h-10 sm:w-11 sm:h-11 shrink-0 rounded-xl bg-emerald-100/70 text-emerald-600 flex items-center justify-center">
+                  {advantageIcons[idx]}
                 </div>
-                <div className="text-base sm:text-lg font-bold text-slate-900 mb-2">
-                  {adv.label}
+                {/* Nhãn chảy liền sau số liệu trên màn rộng, tự xuống dòng gọn trên màn hẹp */}
+                <div className="min-w-0 flex flex-1 flex-wrap items-baseline gap-x-1.5 sm:gap-x-2">
+                  <span className="text-xl sm:text-2xl lg:text-3xl font-extrabold tracking-tight tabular-nums leading-none whitespace-nowrap">
+                    {adv.value}
+                  </span>
+                  <span className="text-base md:text-lg lg:text-xl font-bold leading-snug">
+                    {adv.label}
+                  </span>
                 </div>
               </div>
-              <p className="text-sm text-slate-600 leading-relaxed mt-2">
+
+              <p className="text-base sm:text-[1.0625rem] text-slate-600 leading-relaxed mt-4">
                 {adv.desc}
               </p>
             </div>

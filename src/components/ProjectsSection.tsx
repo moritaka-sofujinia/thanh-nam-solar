@@ -27,7 +27,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ onOpenQuoteMod
           </h2>
           <div className="w-20 h-1.5 bg-emerald-600 mx-auto mt-4 mb-5 rounded-full" />
           <p className="text-base sm:text-lg text-slate-600 leading-relaxed">
-            Hình ảnh và thông số thực tế các công trình điện mặt trời do ThanhNamSolar trực tiếp thiết kế, thi công và bàn giao vận hành tại Thủ Dầu Một, Dĩ An, Thuận An, Bến Cát.
+            Hình ảnh và thông số thực tế các công trình điện mặt trời do <strong className="font-bold text-slate-900">ThanhNam<span className="text-emerald-600">Solar</span></strong> trực tiếp thiết kế, thi công và bàn giao vận hành tại Thủ Dầu Một, Dĩ An, Thuận An, Bến Cát.
           </p>
         </div>
 
@@ -111,7 +111,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ onOpenQuoteMod
           <button
             type="button"
             onClick={goPrev}
-            className="absolute top-1/2 -translate-y-1/2 left-0 -translate-x-1/2 w-11 h-11 rounded-full bg-white border border-slate-200 shadow-md text-slate-700 hover:text-emerald-700 hover:border-emerald-300 flex items-center justify-center transition-colors cursor-pointer z-10"
+            className="absolute top-1/2 -translate-y-1/2 left-1 sm:left-0 sm:-translate-x-1/2 w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-white border border-slate-200 shadow-md text-slate-700 hover:text-emerald-700 hover:border-emerald-300 flex items-center justify-center transition-colors cursor-pointer z-10"
             aria-label="Dự án trước"
           >
             <ChevronLeft className="w-5 h-5" />
@@ -119,7 +119,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ onOpenQuoteMod
           <button
             type="button"
             onClick={goNext}
-            className="absolute top-1/2 -translate-y-1/2 right-0 translate-x-1/2 w-11 h-11 rounded-full bg-white border border-slate-200 shadow-md text-slate-700 hover:text-emerald-700 hover:border-emerald-300 flex items-center justify-center transition-colors cursor-pointer z-10"
+            className="absolute top-1/2 -translate-y-1/2 right-1 sm:right-0 sm:translate-x-1/2 w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-white border border-slate-200 shadow-md text-slate-700 hover:text-emerald-700 hover:border-emerald-300 flex items-center justify-center transition-colors cursor-pointer z-10"
             aria-label="Dự án tiếp theo"
           >
             <ChevronRight className="w-5 h-5" />
