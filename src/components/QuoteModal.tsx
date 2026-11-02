@@ -22,28 +22,46 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({ isOpen, onClose, initial
     district: DISTRICTS_BINH_DUONG[0],
     systemType: 'Hộ gia đình',
     monthlyBill: '2 - 5 triệu/tháng',
-    note: '',
   });
 
+  // Nội dung cấu hình đã chọn ở bảng giá (nếu có) — không hiển thị thành ô nhập,
+  // chỉ đính kèm vào tin nhắn gửi sang Zalo.
+  const [calcSummary, setCalcSummary] = useState('');
+
   const [submitted, setSubmitted] = useState(false);
-  const [inquiryId, setInquiryId] = useState('');
   const [errorMsg, setErrorMsg] = useState('');
 
   useEffect(() => {
-    if (initialData) {
-      setFormData((prev) => ({
-        ...prev,
-        systemType: initialData.customerType || prev.systemType,
-        note: initialData.customNote 
-          ? initialData.customNote 
-          : initialData.kwp 
-            ? `Cần tư vấn gói ${initialData.kwp} kWp (~${initialData.panels} tấm pin), tiền điện hiện tại: ${(initialData.billAmount || 0).toLocaleString('vi-VN')} đ/tháng.`
-            : prev.note,
-      }));
-    }
+    if (!initialData) return;
+    setFormData((prev) => ({
+      ...prev,
+      systemType: initialData.customerType || prev.systemType,
+    }));
+
+    const summary =
+      initialData.customNote ||
+      (initialData.kwp
+        ? `Cần tư vấn gói ${initialData.kwp} kWp (~${initialData.panels} tấm pin), tiền điện hiện tại: ${(initialData.billAmount || 0).toLocaleString('vi-VN')} đ/tháng.`
+        : '');
+    setCalcSummary(summary);
   }, [initialData]);
 
   if (!isOpen) return null;
+
+  // Dựng link Zalo kèm nội dung tin nhắn đã điền sẵn.
+  // Có thể gọi lại bất cứ lúc nào từ dữ liệu form hiện tại.
+  const getZaloLink = () => {
+    const lines = [
+      'XIN BÁO GIÁ ĐIỆN MẶT TRỜI',
+      `Họ tên: ${formData.fullName.trim()}`,
+      `SĐT/Zalo: ${formData.phone.trim()}`,
+      `Khu vực: ${formData.district}`,
+      `Loại hình: ${formData.systemType}`,
+      `Tiền điện/tháng: ${formData.monthlyBill}`,
+    ];
+    if (calcSummary) lines.push(`Cấu hình quan tâm: ${calcSummary}`);
+    return `${COMPANY_INFO.zaloUrl}?text=${encodeURIComponent(lines.join('\n'))}`;
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -58,23 +76,32 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({ isOpen, onClose, initial
     }
 
     setErrorMsg('');
-    const id = 'TNS-' + Math.floor(100000 + Math.random() * 900000);
-    setInquiryId(id);
 
-    // Save to localStorage for inquiry management
+    const zaloLink = getZaloLink();
+
+    // Lưu lại lead trên máy
     const saved = JSON.parse(localStorage.getItem('thanhnam_inquiries') || '[]');
     localStorage.setItem(
       'thanhnam_inquiries',
       JSON.stringify([
         {
-          id,
           ...formData,
+          calcSummary,
           systemKwp: initialData?.kwp || null,
           timestamp: new Date().toISOString(),
         },
         ...saved,
       ])
     );
+
+    // Mở Zalo ngay để khách không phải tự nhắn lại.
+    // Dùng window.open trong chính sự kiện click/submit để trình duyệt (nhất là Safari/iOS)
+    // không chặn popup.
+    const zaloWindow = window.open(zaloLink, '_blank', 'noopener,noreferrer');
+    if (!zaloWindow) {
+      // Popup bị chặn → chuyển trang ngay trong tab hiện tại
+      window.location.href = zaloLink;
+    }
 
     setSubmitted(true);
   };
@@ -110,9 +137,6 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({ isOpen, onClose, initial
           <h3 className="text-xl font-bold text-white">
             Nhận Báo Giá Trọn Gói & Khảo Sát Mái 0đ
           </h3>
-          <p className="text-xs text-slate-300 mt-1">
-            Báo giá minh bạch, cam kết không phát sinh, thiết bị chuẩn Tier 1 bảo hành 25 năm.
-          </p>
         </div>
 
         {/* Content */}
@@ -125,11 +149,11 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({ isOpen, onClose, initial
 
               <div>
                 <h4 className="text-xl font-bold text-slate-900">
-                  Tiếp Nhận Thông Tin Thành Công!
+                  Đã Soạn Tin Nhắn Zalo!
                 </h4>
-                <div className="text-xs text-slate-500 mt-1">
-                  Mã yêu cầu của bạn: <span className="font-mono font-bold text-emerald-700">{inquiryId}</span>
-                </div>
+                <p className="text-xs text-slate-500 mt-1">
+                  Nếu Zalo chưa tự mở, bấm nút bên dưới để gửi yêu cầu cho chúng tôi.
+                </p>
               </div>
 
               <div className="p-4 bg-slate-50 rounded-xl border border-slate-200 text-xs text-slate-600 text-left space-y-1.5">
@@ -139,25 +163,33 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({ isOpen, onClose, initial
                 <div><strong>Nhu cầu:</strong> {formData.systemType}</div>
               </div>
 
-              <p className="text-xs text-slate-600">
-                Kỹ sư trưởng phụ trách khu vực <strong>{formData.district}</strong> sẽ gọi điện trực tiếp cho quý khách trong 15 phút để tư vấn và gửi file dự toán kỹ thuật chi tiết.
-              </p>
-
-              <div className="pt-2 flex flex-col sm:flex-row gap-3">
+              <div className="pt-2 space-y-3">
                 <a
-                  href={`tel:${COMPANY_INFO.hotlineRaw}`}
-                  className="flex-1 py-2.5 px-4 bg-slate-900 hover:bg-slate-800 text-white rounded-lg text-xs font-semibold flex items-center justify-center gap-1.5 transition-colors"
-                >
-                  <Phone className="w-3.5 h-3.5 text-emerald-400" />
-                  <span>Gọi Hotline Ngay</span>
-                </a>
-                <button
-                  type="button"
+                  href={getZaloLink()}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   onClick={handleResetAndClose}
-                  className="flex-1 py-2.5 px-4 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-xs font-semibold transition-colors cursor-pointer"
+                  className="w-full py-3 px-4 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-sm font-bold flex items-center justify-center gap-2 transition-colors"
                 >
-                  Hoàn tất
-                </button>
+                  <Send className="w-4 h-4" />
+                  <span>Gửi Tin Nhắn Qua Zalo</span>
+                </a>
+                <div className="flex flex-col sm:flex-row gap-3">
+                  <a
+                    href={`tel:${COMPANY_INFO.hotlineRaw}`}
+                    className="flex-1 py-2.5 px-4 bg-slate-900 hover:bg-slate-800 text-white rounded-lg text-xs font-semibold flex items-center justify-center gap-1.5 transition-colors"
+                  >
+                    <Phone className="w-3.5 h-3.5 text-emerald-400" />
+                    <span>Gọi Hotline Ngay</span>
+                  </a>
+                  <button
+                    type="button"
+                    onClick={handleResetAndClose}
+                    className="flex-1 py-2.5 px-4 bg-slate-100 hover:bg-slate-200 text-slate-800 rounded-lg text-xs font-semibold transition-colors cursor-pointer"
+                  >
+                    Hoàn tất
+                  </button>
+                </div>
               </div>
             </div>
           ) : (
@@ -245,22 +277,9 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({ isOpen, onClose, initial
                 </div>
               </div>
 
-              <div>
-                <label className="block text-xs font-semibold text-slate-700 mb-1">
-                  Ghi chú hoặc yêu cầu đặc biệt
-                </label>
-                <textarea
-                  rows={2}
-                  value={formData.note}
-                  onChange={(e) => setFormData({ ...formData, note: e.target.value })}
-                  placeholder="Mái nhà tôn hay bê tông, nhu cầu dùng điện ban ngày hay ban đêm..."
-                  className="w-full px-3.5 py-2 bg-slate-50 border border-slate-300 rounded-lg text-xs text-slate-900 placeholder-slate-400 focus:outline-hidden focus:border-emerald-600 focus:bg-white resize-none"
-                />
-              </div>
-
               <div className="flex items-center gap-1.5 text-[11px] text-slate-500 pt-1">
                 <ShieldCheck className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
-                <span>Cam kết bảo mật thông tin 100%, không làm phiền quý khách.</span>
+                <span>Cam kết bảo mật thông tin 100%.</span>
               </div>
 
               <button
