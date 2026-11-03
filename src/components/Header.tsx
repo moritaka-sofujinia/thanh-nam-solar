@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Sun, Phone, Menu, X, ArrowRight, ShieldCheck } from 'lucide-react';
+import { Phone, Menu, X, ArrowRight, ShieldCheck } from 'lucide-react';
 import { COMPANY_INFO } from '../data/solarData';
 
 interface HeaderProps {
@@ -18,13 +18,12 @@ export const Header: React.FC<HeaderProps> = ({ onOpenQuoteModal }) => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // 4 mục điều hướng chính — mỗi mục là một TRANG riêng (không phải anchor)
   const navLinks = [
-    { name: 'Trang chủ', href: '#trang-chu' },
-    { name: 'Giới thiệu', href: '#gioi-thieu' },
-    { name: 'Dịch vụ', href: '#dich-vu' },
-    { name: 'Dự án', href: '#du-an' },
-    { name: 'Báo giá', href: '#bang-gia' },
-    { name: 'Liên hệ', href: '#lien-he' },
+    { name: 'Trang chủ', href: '/' },
+    { name: 'Giới thiệu', href: '/gioi-thieu' },
+    { name: 'Dự án', href: '/du-an' },
+    { name: 'Dịch vụ', href: '/dich-vu' },
   ];
 
   return (
@@ -40,25 +39,22 @@ export const Header: React.FC<HeaderProps> = ({ onOpenQuoteModal }) => {
         <div className="flex items-center justify-between gap-3 sm:gap-4 lg:gap-8 min-w-0">
           {/* Zone 1: Brand Wordmark element */}
           <a
-            href="#trang-chu"
+            href="/"
             className="flex items-center gap-2.5 text-slate-900 group whitespace-nowrap shrink-0"
-            aria-label="ThanhNamSolar Trang chủ"
+            aria-label="VITECH CO Trang chủ"
           >
-            <div className="w-10 h-10 rounded-lg bg-emerald-600 text-white flex items-center justify-center shadow-xs transition-transform group-hover:scale-105">
-              <Sun className="w-5 h-5" />
-            </div>
             <div className="flex flex-col">
               <span className="text-2xl font-extrabold tracking-tight text-slate-900 leading-none">
-                ThanhNam<span className="text-emerald-600">Solar</span>
+                VITECH<span className="text-emerald-600"> CO</span>
               </span>
-              <span className="text-[11px] tracking-wider uppercase font-semibold text-slate-500 mt-1">
-                Năng Lượng Xanh Bình Dương
+              <span className="text-[11px] tracking-wider uppercase font-semibold text-slate-600 mt-1">
+                ĐIỆN MẶT TRỜI BÌNH DƯƠNG
               </span>
             </div>
           </a>
 
           {/* Zone 2: Navigation Links */}
-          <nav className="hidden lg:flex items-center gap-8 text-base font-medium text-slate-700">
+          <nav className="hidden xl:flex items-center gap-5 xl:gap-7 text-[15px] font-medium text-slate-800 min-w-0">
             {navLinks.map((link) => (
               <a
                 key={link.href}
@@ -82,7 +78,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenQuoteModal }) => {
                 <Phone className="w-4 h-4" />
               </div>
               <div className="text-left">
-                <div className="text-[11px] text-slate-500 font-medium leading-none">Hotline Bình Dương</div>
+                <div className="text-[11px] text-slate-600 font-medium leading-none">Hotline Bình Dương</div>
                 <div className="text-base font-bold text-slate-900 tracking-tight leading-tight mt-0.5">
                   {COMPANY_INFO.hotline}
                 </div>
@@ -98,8 +94,8 @@ export const Header: React.FC<HeaderProps> = ({ onOpenQuoteModal }) => {
             </button>
           </div>
 
-          {/* Mobile hamburger button */}
-          <div className="flex items-center gap-2 lg:hidden">
+          {/* Mobile hamburger button — hiện khi nav ngang bị ẩn (dưới xl) */}
+          <div className="flex items-center gap-2 xl:hidden">
             <button
               onClick={onOpenQuoteModal}
               className="sm:hidden px-3 py-1.5 text-xs font-semibold text-white bg-emerald-600 rounded-md whitespace-nowrap"
@@ -108,7 +104,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenQuoteModal }) => {
             </button>
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 text-slate-700 hover:text-emerald-600 hover:bg-slate-100 rounded-lg transition-colors cursor-pointer"
+              className="p-2 text-slate-800 hover:text-emerald-600 hover:bg-slate-100 rounded-lg transition-colors cursor-pointer"
               aria-label="Toggle navigation menu"
             >
               {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -118,14 +114,14 @@ export const Header: React.FC<HeaderProps> = ({ onOpenQuoteModal }) => {
 
         {/* Mobile Navigation Drawer */}
         {mobileMenuOpen && (
-          <div className="lg:hidden mt-3 pt-3 border-t border-slate-200 pb-4 space-y-2">
+          <div className="xl:hidden mt-3 pt-3 border-t border-slate-200 pb-4 space-y-2">
             <div className="grid grid-cols-2 gap-2 mb-3">
               {navLinks.map((link) => (
                 <a
                   key={link.href}
                   href={link.href}
                   onClick={() => setMobileMenuOpen(false)}
-                  className="px-3 py-2 text-sm font-medium text-slate-700 hover:text-emerald-600 hover:bg-slate-50 rounded-lg transition-colors"
+                  className="px-3 py-2 text-sm font-medium text-slate-800 hover:text-emerald-600 hover:bg-slate-50 rounded-lg transition-colors"
                 >
                   {link.name}
                 </a>
@@ -140,7 +136,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenQuoteModal }) => {
                 <Phone className="w-4 h-4 text-emerald-600" />
                 <span>Hotline: {COMPANY_INFO.hotline}</span>
               </a>
-              <div className="flex items-center gap-1.5 text-xs text-slate-600">
+              <div className="flex items-center gap-1.5 text-xs text-slate-700">
                 <ShieldCheck className="w-4 h-4 text-emerald-600" />
                 <span>Khảo sát mái tận nơi miễn phí 24h</span>
               </div>

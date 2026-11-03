@@ -8,22 +8,22 @@ interface AdvantagesSectionProps {
 
 export const AdvantagesSection: React.FC<AdvantagesSectionProps> = ({ onOpenQuoteModal }) => {
   const advantageIcons = [
-    <Award className="w-6 h-6 text-emerald-600" key="award" />,
-    <ShieldCheck className="w-6 h-6 text-emerald-600" key="shield" />,
-    <Clock className="w-6 h-6 text-emerald-600" key="clock" />,
-    <TrendingUp className="w-6 h-6 text-emerald-600" key="trend" />,
+    <Award className="w-6 h-6 text-emerald-700" key="award" />,
+    <ShieldCheck className="w-6 h-6 text-emerald-700" key="shield" />,
+    <Clock className="w-6 h-6 text-emerald-700" key="clock" />,
+    <TrendingUp className="w-6 h-6 text-emerald-700" key="trend" />,
   ];
 
   return (
     <section id="loi-the" className="py-20 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 lg:pl-[21rem] xl:pl-[24rem]">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-slate-900 tracking-tight leading-[1.2]">
-            TẠI SAO CHỌN THANHNAM<span className="text-emerald-600">SOLAR</span>?
+            TẠI SAO CHỌN VITECH<span className="text-emerald-600"> CO</span>?
           </h2>
           <div className="w-20 h-1.5 bg-emerald-600 mx-auto mt-4 mb-5 rounded-full" />
-          <p className="text-base sm:text-lg text-slate-600 leading-relaxed">
+          <p className="text-base sm:text-lg text-slate-700 leading-relaxed">
             Chúng tôi tự hào là tổng kho phân phối và nhà thầu EPC điện mặt trời có trụ sở và kỹ sư trực tiếp tại tỉnh Bình Dương, mang đến giải pháp tối ưu chi phí và hỗ trợ thần tốc.
           </p>
         </div>
@@ -33,11 +33,11 @@ export const AdvantagesSection: React.FC<AdvantagesSectionProps> = ({ onOpenQuot
           {ADVANTAGES_DATA.map((adv, idx) => (
             <div
               key={idx}
-              className="p-6 sm:p-7 bg-slate-50 border border-slate-200/80 rounded-2xl hover:border-emerald-500/50 hover:bg-emerald-50/20 transition-all duration-200 flex flex-col justify-between"
+              className="p-6 sm:p-7 bg-slate-100/80 border border-slate-300 rounded-2xl shadow-sm hover:border-emerald-500 hover:bg-emerald-50/40 hover:shadow-md transition-all duration-200 flex flex-col justify-between"
             >
               {/* Icon + số liệu + nhãn chung một khối, đồng màu xanh thương hiệu */}
-              <div className="flex items-center gap-2.5 sm:gap-3 text-emerald-600">
-                <div className="w-10 h-10 sm:w-11 sm:h-11 shrink-0 rounded-xl bg-emerald-100/70 text-emerald-600 flex items-center justify-center">
+              <div className="flex items-center gap-2.5 sm:gap-3 text-emerald-700">
+                <div className="w-10 h-10 sm:w-11 sm:h-11 shrink-0 rounded-xl bg-emerald-600/10 text-emerald-700 flex items-center justify-center">
                   {advantageIcons[idx]}
                 </div>
                 {/* Nhãn chảy liền sau số liệu trên màn rộng, tự xuống dòng gọn trên màn hẹp */}
@@ -51,7 +51,7 @@ export const AdvantagesSection: React.FC<AdvantagesSectionProps> = ({ onOpenQuot
                 </div>
               </div>
 
-              <p className="text-base sm:text-[1.0625rem] text-slate-600 leading-relaxed mt-4">
+              <p className="text-base sm:text-[1.0625rem] font-medium text-slate-800 leading-relaxed mt-4">
                 {adv.desc}
               </p>
             </div>
@@ -68,7 +68,7 @@ export const AdvantagesSection: React.FC<AdvantagesSectionProps> = ({ onOpenQuot
               4 Bước Triển Khai Chuyên Nghiệp & Minh Bạch
             </h3>
             <p className="text-base text-slate-300 mt-2.5">
-              Tất cả các dự án của ThanhNamSolar đều được thực hiện theo tiêu chuẩn kỹ thuật điện nghiêm ngặt, bàn giao hồ sơ đầy đủ và hỗ trợ thủ tục với EVN Bình Dương.
+              Tất cả các dự án của VITECH CO đều được thực hiện theo tiêu chuẩn kỹ thuật điện nghiêm ngặt, bàn giao hồ sơ đầy đủ và hỗ trợ thủ tục với EVN Bình Dương.
             </p>
           </div>
 
@@ -82,12 +82,9 @@ export const AdvantagesSection: React.FC<AdvantagesSectionProps> = ({ onOpenQuot
                   <div className="text-3xl font-black text-emerald-400 tabular-nums mb-3 font-mono">
                     {step.step}.
                   </div>
-                  <h4 className="text-base font-bold text-white mb-2 leading-snug">
+                  <h4 className="text-base sm:text-lg font-bold text-white leading-snug">
                     {step.title}
                   </h4>
-                  <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
-                    {step.desc}
-                  </p>
                 </div>
               </div>
             ))}

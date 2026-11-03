@@ -11,18 +11,18 @@ export const FaqSection: React.FC = () => {
 
   return (
     <section className="py-16 bg-white border-t border-slate-200/60">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-14">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 lg:pl-[21rem] xl:pl-[24rem]">
+        <div className="max-w-4xl mx-auto text-center mb-14">
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-slate-900 tracking-tight leading-[1.2]">
             CÂU HỎI THƯỜNG GẶP VỀ ĐIỆN MẶT TRỜI BÌNH DƯƠNG
           </h2>
           <div className="w-20 h-1.5 bg-emerald-600 mx-auto mt-4 mb-4 rounded-full" />
-          <p className="text-base sm:text-lg text-slate-600">
+          <p className="text-base sm:text-lg text-slate-700">
             Những băn khoăn phổ biến nhất của các hộ gia đình và chủ nhà xưởng trước khi lắp đặt hệ thống.
           </p>
         </div>
 
-        <div className="space-y-4">
+        <div className="max-w-4xl mx-auto space-y-4">
           {FAQS_DATA.map((faq, idx) => {
             const isOpen = openIndex === idx;
             return (
@@ -40,7 +40,7 @@ export const FaqSection: React.FC = () => {
                     {faq.q}
                   </span>
                   <div
-                    className={`w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center shrink-0 text-slate-600 transition-transform duration-200 ${
+                    className={`w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center shrink-0 text-slate-700 transition-transform duration-200 ${
                       isOpen ? 'rotate-180 bg-emerald-100 text-emerald-700' : ''
                     }`}
                   >
@@ -49,7 +49,7 @@ export const FaqSection: React.FC = () => {
                 </button>
 
                 {isOpen && (
-                  <div className="p-5 sm:p-6 pt-0 text-sm sm:text-base text-slate-600 leading-relaxed bg-white border-t border-slate-100 animate-in fade-in duration-150">
+                  <div className="p-5 sm:p-6 pt-0 text-sm sm:text-base text-slate-700 leading-relaxed bg-white border-t border-slate-100 animate-in fade-in duration-150">
                     {faq.a}
                   </div>
                 )}

@@ -15,7 +15,7 @@ const {
 } = Astro.props;
 
 // Absolute URL for Open Graph assets; falls back to the real site origin.
-const site = Astro.site ?? new URL('https://thanhnamsolar.com');
+const site = Astro.site ?? new URL('https://vitechco.com');
 const canonicalURL = new URL(Astro.url.pathname, site);
 const ogImageURL = new URL(ogImage, site);
 
@@ -23,10 +23,10 @@ const ogImageURL = new URL(ogImage, site);
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'LocalBusiness',
-  name: 'ThanhNamSolar Bình Dương',
+  name: 'VITECH CO Bình Dương',
   image: ogImageURL.href,
   telephone: '+84988567892',
-  email: 'lienhe@thanhnamsolar.com',
+  email: 'lienhe@vitechco.com',
   address: {
     '@type': 'PostalAddress',
     streetAddress: 'Số 168 Đại lộ Bình Dương, Phường Phú Hòa',
@@ -83,7 +83,7 @@ void COMPANY_INFO;
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="ThanhNamSolar" />
+    <meta property="og:site_name" content="VITECH CO" />
     <meta property="og:url" content={canonicalURL.href} />
     <meta property="og:image" content={ogImageURL.href} />
     <meta property="og:locale" content="vi_VN" />
@@ -102,7 +102,7 @@ void COMPANY_INFO;
 
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   </head>
-  <body class="bg-white text-slate-900 antialiased font-sans">
+  <body class="bg-white text-slate-900 font-sans">
     <slot />
   </body>
 </html>

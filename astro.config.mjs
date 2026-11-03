@@ -4,7 +4,7 @@ import tailwindcss from '@tailwindcss/vite';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://thanhnamsolar.com',
+  site: 'https://vitechco.com',
   server: {
     port: 3000,
     host: true,

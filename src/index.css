@@ -2,6 +2,8 @@
 
 @theme {
   --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  /* Chữ mặc định dày hơn một chút: Plus Jakarta Sans nét mảnh nên 400 bị "nhạt" trên nền sáng */
+  --font-weight-normal: 450;
   --color-solar-50: #f0fdf4;
   --color-solar-100: #dcfce7;
   --color-solar-500: #22c55e;
@@ -12,10 +14,15 @@
 
 html {
   scroll-behavior: smooth;
-  /* Chặn cuộn ngang do phần tử trang trí tràn mép (ví dụ mũi tên carousel) */
-  overflow-x: hidden;
+  /* Chặn cuộn ngang do phần tử trang trí tràn mép.
+     Dùng "clip" (không phải "hidden") để KHÔNG tạo scroll container mới,
+     giữ cho position:sticky của sidebar hoạt động bình thường. */
+  overflow-x: clip;
 }
 
 body {
-  overflow-x: hidden;
+  overflow-x: clip;
+  font-weight: 450;
+  -webkit-font-smoothing: auto;
+  -moz-osx-font-smoothing: auto;
 }

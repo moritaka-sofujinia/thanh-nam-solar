@@ -80,9 +80,9 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({ isOpen, onClose, initial
     const zaloLink = getZaloLink();
 
     // Lưu lại lead trên máy
-    const saved = JSON.parse(localStorage.getItem('thanhnam_inquiries') || '[]');
+    const saved = JSON.parse(localStorage.getItem('vitechco_inquiries') || '[]');
     localStorage.setItem(
-      'thanhnam_inquiries',
+      'vitechco_inquiries',
       JSON.stringify([
         {
           ...formData,
@@ -131,7 +131,7 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({ isOpen, onClose, initial
 
           <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-emerald-400 mb-1">
             <Sun className="w-3.5 h-3.5" />
-            <span>ThanhNamSolar Bình Dương</span>
+            <span>VITECH CO Bình Dương</span>
           </div>
 
           <h3 className="text-xl font-bold text-white">
@@ -151,12 +151,12 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({ isOpen, onClose, initial
                 <h4 className="text-xl font-bold text-slate-900">
                   Đã Soạn Tin Nhắn Zalo!
                 </h4>
-                <p className="text-xs text-slate-500 mt-1">
+                <p className="text-xs text-slate-600 mt-1">
                   Nếu Zalo chưa tự mở, bấm nút bên dưới để gửi yêu cầu cho chúng tôi.
                 </p>
               </div>
 
-              <div className="p-4 bg-slate-50 rounded-xl border border-slate-200 text-xs text-slate-600 text-left space-y-1.5">
+              <div className="p-4 bg-slate-50 rounded-xl border border-slate-200 text-xs text-slate-700 text-left space-y-1.5">
                 <div><strong>Khách hàng:</strong> {formData.fullName}</div>
                 <div><strong>Số điện thoại:</strong> {formData.phone}</div>
                 <div><strong>Địa bàn khảo sát:</strong> {formData.district}</div>
@@ -215,7 +215,7 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({ isOpen, onClose, initial
               )}
 
               <div>
-                <label className="block text-xs font-semibold text-slate-700 mb-1">
+                <label className="block text-xs font-semibold text-slate-800 mb-1">
                   Họ và tên quý khách <span className="text-red-500">*</span>
                 </label>
                 <input
@@ -229,7 +229,7 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({ isOpen, onClose, initial
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-slate-700 mb-1">
+                <label className="block text-xs font-semibold text-slate-800 mb-1">
                   Số điện thoại / Zalo liên hệ <span className="text-red-500">*</span>
                 </label>
                 <input
@@ -244,7 +244,7 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({ isOpen, onClose, initial
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700 mb-1">
+                  <label className="block text-xs font-semibold text-slate-800 mb-1">
                     Khu vực tại Bình Dương
                   </label>
                   <select
@@ -261,7 +261,7 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({ isOpen, onClose, initial
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700 mb-1">
+                  <label className="block text-xs font-semibold text-slate-800 mb-1">
                     Loại hình công trình
                   </label>
                   <select
@@ -277,7 +277,7 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({ isOpen, onClose, initial
                 </div>
               </div>
 
-              <div className="flex items-center gap-1.5 text-[11px] text-slate-500 pt-1">
+              <div className="flex items-center gap-1.5 text-[11px] text-slate-600 pt-1">
                 <ShieldCheck className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
                 <span>Cam kết bảo mật thông tin 100%.</span>
               </div>

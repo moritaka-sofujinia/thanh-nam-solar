@@ -12,7 +12,7 @@ export const ContactSection: React.FC = () => {
           </h2>
           <div className="w-20 h-1.5 bg-emerald-500 mt-4 mb-5 rounded-full" />
           <p className="text-base sm:text-lg text-slate-300 leading-relaxed">
-            Đội ngũ kỹ sư năng lượng mặt trời ThanhNamSolar luôn sẵn sàng hỗ trợ kiểm tra mái nhà, đo đạc hướng nắng và lên bản vẽ thiết kế trực tiếp tại địa bàn tỉnh Bình Dương.
+            Đội ngũ kỹ sư năng lượng mặt trời VITECH CO luôn sẵn sàng hỗ trợ kiểm tra mái nhà, đo đạc hướng nắng và lên bản vẽ thiết kế trực tiếp tại địa bàn tỉnh Bình Dương.
           </p>
         </div>
 

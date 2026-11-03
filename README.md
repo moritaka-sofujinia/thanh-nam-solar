@@ -1,6 +1,6 @@
-# ThanhNamSolar — Website Lắp Đặt Điện Mặt Trời Bình Dương
+# VITECH CO — Website Lắp Đặt Điện Mặt Trời Bình Dương
 
-Landing page doanh nghiệp cho ThanhNamSolar, xây dựng trên **Astro 7** + **React 19** (island) + **Tailwind CSS 4**.
+Landing page doanh nghiệp cho VITECH CO, xây dựng trên **Astro 7** + **React 19** (island) + **Tailwind CSS 4**.
 
 ## Kiến trúc
 

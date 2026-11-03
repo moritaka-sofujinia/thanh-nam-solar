@@ -1,5 +1,5 @@
 import React from 'react';
-import { Sun, Phone, Mail, MapPin } from 'lucide-react';
+import { Phone, Mail, MapPin } from 'lucide-react';
 import { COMPANY_INFO } from '../data/solarData';
 
 export const Footer: React.FC = () => {
@@ -10,15 +10,12 @@ export const Footer: React.FC = () => {
           {/* Cột 1: Thông tin công ty */}
           <div className="lg:col-span-7 space-y-4">
             <div className="flex items-center gap-2.5">
-              <div className="w-11 h-11 rounded-lg bg-emerald-600 text-white flex items-center justify-center">
-                <Sun className="w-6 h-6" />
-              </div>
               <div className="flex flex-col">
                 <span className="text-2xl font-bold tracking-tight text-white leading-none">
-                  ThanhNam<span className="text-emerald-500">Solar</span>
+                  VITECH<span className="text-emerald-500"> CO</span>
                 </span>
                 <span className="text-xs tracking-wider uppercase font-semibold text-slate-400 mt-1">
-                  Năng Lượng Xanh Bình Dương
+                  ĐIỆN MẶT TRỜI BÌNH DƯƠNG
                 </span>
               </div>
             </div>
@@ -76,12 +73,22 @@ export const Footer: React.FC = () => {
         {/* Dòng cuối per spec */}
         <div className="mt-12 pt-6 border-t border-slate-900 text-sm text-slate-400 flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-4 text-center sm:text-left">
           <p>
-            Bản quyền thuộc về ThanhNamSolar © {new Date().getFullYear()}
+            Bản quyền thuộc về VITECH CO © {new Date().getFullYear()}
           </p>
           <div className="flex flex-col sm:flex-row items-center gap-1 sm:gap-3 text-sm text-center sm:text-right">
             <span>Lắp đặt điện mặt trời giá rẻ tại Bình Dương</span>
             <span className="hidden sm:inline">·</span>
-            <span>Thiết bị Tier 1 chính hãng</span>
+            <span>
+              Thiết kế bởi{' '}
+              <a
+                href="https://moritaka-sofujinia.id.vn/vi"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-semibold text-emerald-400 hover:text-emerald-300 underline underline-offset-2 transition-colors"
+              >
+                Moritaka Sofujinia
+              </a>
+            </span>
           </div>
         </div>
       </div>
