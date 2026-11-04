@@ -67,8 +67,9 @@ export const Header: React.FC<HeaderProps> = ({ onOpenQuoteModal }) => {
             ))}
           </nav>
 
-          {/* Zone 3: Hotline and 1 Primary CTA Action */}
-          <div className="hidden sm:flex items-center gap-2 lg:gap-4 min-w-0">
+          {/* Zone 3: Hotline and 1 Primary CTA Action
+              ml-auto: khi nav ẩn (dưới xl) nhóm này bị đẩy sát phải, không lơ lửng giữa thanh */}
+          <div className="hidden sm:flex items-center gap-2 lg:gap-4 min-w-0 ml-auto xl:ml-0">
             <a
               href={`tel:${COMPANY_INFO.hotlineRaw}`}
               className="hidden md:flex items-center gap-2.5 text-slate-800 hover:text-emerald-600 transition-colors py-1.5 px-2 lg:px-3.5 rounded-xl hover:bg-slate-50 whitespace-nowrap shrink min-w-0"
@@ -96,12 +97,15 @@ export const Header: React.FC<HeaderProps> = ({ onOpenQuoteModal }) => {
 
           {/* Mobile hamburger button — hiện khi nav ngang bị ẩn (dưới xl) */}
           <div className="flex items-center gap-2 xl:hidden">
-            <button
-              onClick={onOpenQuoteModal}
-              className="sm:hidden px-3 py-1.5 text-xs font-semibold text-white bg-emerald-600 rounded-md whitespace-nowrap"
+            {/* Mobile (< sm): gọi Hotline trực tiếp thay cho nút Báo giá */}
+            <a
+              href={`tel:${COMPANY_INFO.hotlineRaw}`}
+              aria-label={`Gọi hotline ${COMPANY_INFO.hotline}`}
+              className="sm:hidden inline-flex items-center gap-1.5 px-2.5 py-1.5 text-xs font-bold text-white bg-emerald-600 hover:bg-emerald-700 rounded-md whitespace-nowrap transition-colors"
             >
-              Báo giá
-            </button>
+              <Phone className="w-3.5 h-3.5 shrink-0" />
+              <span>{COMPANY_INFO.hotline}</span>
+            </a>
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className="p-2 text-slate-800 hover:text-emerald-600 hover:bg-slate-100 rounded-lg transition-colors cursor-pointer"

@@ -9,6 +9,9 @@ import { Hero } from '../components/Hero';
 import { AboutSection } from '../components/AboutSection';
 import { ProjectsSection } from '../components/ProjectsSection';
 import { ServicesSection } from '../components/ServicesSection';
+import { AluminumDoorSection } from '../components/AluminumDoorSection';
+import { AustdoorSection } from '../components/AustdoorSection';
+import { SolarHybridSection } from '../components/SolarHybridSection';
 import { ContactSection } from '../components/ContactSection';
 import { Footer } from '../components/Footer';
 import { QuoteModal } from '../components/QuoteModal';
@@ -17,7 +20,15 @@ import { SidebarPanels } from '../components/HeroSidebar';
 import { COMPANY_INFO } from '../data/solarData';
 import { ArrowRight, Phone } from 'lucide-react';
 
-export type PageSection = 'about' | 'projects' | 'services';
+export type PageSection =
+  | 'about'
+  | 'projects'
+  | 'services'
+  | 'aluminum'
+  | 'austdoor'
+  | 'solar-hybrid'
+  | 'solar-5kw'
+  | 'solar-10kw';
 
 interface SitePageProps {
   section: PageSection;
@@ -84,6 +95,21 @@ export default function SitePage({ section }: SitePageProps) {
           )}
           {section === 'services' && (
             <ServicesSection onOpenQuoteModal={handleOpenQuote} align="left" />
+          )}
+          {section === 'aluminum' && (
+            <AluminumDoorSection onOpenQuoteModal={handleOpenQuote} align="left" />
+          )}
+          {section === 'austdoor' && (
+            <AustdoorSection onOpenQuoteModal={handleOpenQuote} align="left" />
+          )}
+          {section === 'solar-hybrid' && (
+            <SolarHybridSection onOpenQuoteModal={handleOpenQuote} align="left" capacity="3kw" />
+          )}
+          {section === 'solar-5kw' && (
+            <SolarHybridSection onOpenQuoteModal={handleOpenQuote} align="left" capacity="5kw" />
+          )}
+          {section === 'solar-10kw' && (
+            <SolarHybridSection onOpenQuoteModal={handleOpenQuote} align="left" capacity="10kw" />
           )}
         </div>
 

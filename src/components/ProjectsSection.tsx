@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { MapPin, Zap } from 'lucide-react';
+import React from 'react';
 import { PROJECTS_PAGE_DATA } from '../data/solarData';
+import { ImageGallery } from './ImageGallery';
 
 interface ProjectsSectionProps {
   onOpenQuoteModal: () => void;
@@ -13,25 +13,9 @@ interface ProjectsSectionProps {
   align?: 'left' | 'center';
 }
 
-const AUTO_MS = 3000;
-
 export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ variant = 'gallery', align = 'center' }) => {
   const isGallery = variant === 'gallery';
   const center = align === 'center';
-
-  const [index, setIndex] = useState(0);
-  const [paused, setPaused] = useState(false);
-
-  // Chỉ trang chủ mới tự chuyển ảnh
-  useEffect(() => {
-    if (!isGallery || paused) return;
-    const timer = setInterval(() => {
-      setIndex((i) => (i + 1) % PROJECTS_PAGE_DATA.length);
-    }, AUTO_MS);
-    return () => clearInterval(timer);
-  }, [isGallery, paused]);
-
-  const current = PROJECTS_PAGE_DATA[index] ?? PROJECTS_PAGE_DATA[0];
 
   return (
     <section id="du-an" className="py-20 bg-slate-50 border-t border-slate-200/60">
@@ -48,66 +32,15 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ variant = 'gal
         </div>
 
         {isGallery ? (
-          /* ===== TRANG CHỦ: cụm ảnh (ảnh lớn + 4 thumbnail tự chuyển) ===== */
-          <>
-            <div
-              className="relative overflow-hidden rounded-2xl border border-slate-200 shadow-sm bg-slate-900"
-              onMouseEnter={() => setPaused(true)}
-              onMouseLeave={() => setPaused(false)}
-            >
-              <div className="relative aspect-[16/9] w-full">
-                {PROJECTS_PAGE_DATA.map((project, i) => (
-                  <img
-                    key={`${project.image}-${i}`}
-                    src={project.image}
-                    alt={project.title}
-                    referrerPolicy="no-referrer"
-                    className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${
-                      i === index ? 'opacity-100' : 'opacity-0'
-                    }`}
-                  />
-                ))}
-              </div>
-
-              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950/90 via-slate-950/55 to-transparent px-5 sm:px-7 pt-16 pb-5 sm:pb-6">
-                <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-white leading-snug flex items-start gap-2">
-                  <Zap className="w-5 h-5 shrink-0 text-emerald-400 mt-1" />
-                  <span>{current.title}</span>
-                </h3>
-                <div className="mt-1.5 pl-7 text-sm sm:text-base text-slate-200 flex items-center gap-1.5">
-                  <MapPin className="w-4 h-4 shrink-0 text-emerald-400" />
-                  <span>{current.location}</span>
-                </div>
-              </div>
-            </div>
-
-            <div className="mt-4 grid grid-cols-4 gap-3 sm:gap-4">
-              {PROJECTS_PAGE_DATA.map((project, i) => (
-                <button
-                  key={`${project.image}-${i}`}
-                  type="button"
-                  onClick={() => setIndex(i)}
-                  aria-label={`Xem ảnh ${i + 1}: ${project.title}`}
-                  aria-current={i === index}
-                  title={project.title}
-                  className={`group relative overflow-hidden rounded-xl border-2 transition-all cursor-pointer ${
-                    i === index
-                      ? 'border-emerald-600 ring-2 ring-emerald-600/25'
-                      : 'border-slate-200 hover:border-emerald-400 opacity-80 hover:opacity-100'
-                  }`}
-                >
-                  <div className="aspect-[16/10] w-full bg-slate-100">
-                    <img
-                      src={project.image}
-                      alt={project.title}
-                      referrerPolicy="no-referrer"
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                    />
-                  </div>
-                </button>
-              ))}
-            </div>
-          </>
+          /* ===== TRANG CHỦ: cụm ảnh dùng component dùng chung ===== */
+          <ImageGallery
+            items={PROJECTS_PAGE_DATA.map((project) => ({
+              src: project.image,
+              alt: project.title,
+              title: project.title,
+              subtitle: project.location,
+            }))}
+          />
         ) : (
           /* ===== TRANG DỰ ÁN: nội dung dạng bài viết, ảnh riêng từng dự án ===== */
           <div className="max-w-3xl space-y-16">

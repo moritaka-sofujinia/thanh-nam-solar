@@ -158,11 +158,11 @@ export const ADVANTAGES_DATA = [
 // Sidebar điều hướng phụ cho laptop (dùng ở Hero).
 // href: '#' là placeholder — sẽ trỏ tới trang riêng khi các trang đó được tạo.
 export const SIDEBAR_SERVICE_LINKS = [
-  { name: 'Lắp cửa nhôm XingFa', href: '#' },
-  { name: 'Lắp cửa cuốn Austdoor', href: '#' },
-  { name: 'Lắp điện mặt trời 3kW', href: '#' },
-  { name: 'Lắp điện mặt trời 5kW', href: '#' },
-  { name: 'Lắp điện mặt trời 10kW', href: '#' },
+  { name: 'Lắp cửa nhôm XingFa', href: '/lap-cua-nhom-xingfa-binh-duong' },
+  { name: 'Lắp cửa cuốn Austdoor', href: '/lap-cua-cuon-austdoor-binh-duong' },
+  { name: 'Lắp điện mặt trời 3kW', href: '/lap-dien-mat-troi-hybrid-3kw-binh-duong' },
+  { name: 'Lắp điện mặt trời 5kW', href: '/lap-dien-mat-troi-hybrid-5kw-binh-duong' },
+  { name: 'Lắp điện mặt trời 10kW', href: '/lap-dien-mat-troi-hybrid-10kw-binh-duong' },
   { name: 'Đèn năng lượng mặt trời', href: '#' },
 ];
 
